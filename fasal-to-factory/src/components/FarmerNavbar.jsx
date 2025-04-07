@@ -54,6 +54,7 @@ import plantLogo from "../assets/images/plantLogo.svg";
 import menuIcon from "../assets/images/menuIcon.svg";
 import FarmerSidebar from "../components/FarmerSidebar.jsx";
 import FarmerProfile from "../components/FarmerProfile.jsx";
+import AddItem from "./AddItem.jsx";
 
 function FarmerNavbar() {
   // States for handling sidebar
@@ -63,13 +64,20 @@ function FarmerNavbar() {
   };
 
   // States for handling profile menu
-  const [profileStatus, setProfileStatus] = useState(true);
+  const [profileStatus, setProfileStatus] = useState(false);
   const handleProfileToggle = () => {
     setMenuStatus(!menuStatus);
     setProfileStatus(!profileStatus);
   };
 
-  // 🟢 Get userId from localStorage
+  // States for handling add item menu
+  const [addItemStatus, setAddItemStatus] = useState(true);
+  const handleAddItemToggle = () => {
+    setMenuStatus(!menuStatus);
+    setAddItemStatus(!addItemStatus);
+  };
+
+  //  Get userId from localStorage
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -81,13 +89,13 @@ function FarmerNavbar() {
 
   return (
     <div className="flex flex-col sm:flex-row flex-wrap w-full border px-4 py-2 justify-center sm:justify-between items-center bg-[#3F7D58] text-white rounded-t-xl text-lg  ">
-      {/* Logo and Brand Name */}
+    
       <div className="flex gap-2 items-center mb-3 sm:mb-0">
         <img className="w-[40px]" src={plantLogo} alt="Farm Logo" />
         <a href="/farmer-dashboard">Fasal 2 factory</a>
       </div>
 
-      {/* Navigation Links */}
+    
       <ul className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
         <li><a href="/" className="hover:font-bold  ">Home</a></li>
         <li><a href="#" className="hover:font-bold ">About</a></li>
@@ -102,14 +110,25 @@ function FarmerNavbar() {
         menuStatus={menuStatus}
         handleMenuToggle={handleMenuToggle}
         handleProfileToggle={handleProfileToggle}
+        handleAddItemToggle={handleAddItemToggle}
       />
 
-      {/* 🔥 Now passing userId to FarmerProfile */}
       <FarmerProfile
         userId={userId}
         profileStatus={profileStatus}
         handleProfileToggle={handleProfileToggle}
       />
+
+      <AddItem addItemStatus={addItemStatus} handleAddItemToggle={handleAddItemToggle} />
+
+     
+
+      {/* Add New Item Modal */}
+      {/* <AddItemModal addItemStatus={addItemStatus} handleAddItemToggle={handleAddItemToggle} /> */}
+
+      {/* Success Message */}
+      {/* <SuccessMessage showSuccess={showSuccess} setShowSuccess={setShowSuccess} /> */}
+
     </div>
   );
 }
