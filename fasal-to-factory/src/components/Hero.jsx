@@ -2,6 +2,7 @@
 // import Carousel from "./Carousel";
 // import manWalking from "../assets/vedios/manWalking.mp4"
 import tractor from "../assets/vedios/tractorHarvesting.mp4"
+// import DecryptingText from "./animations/DecryptingText";
 
 
 function Hero() {
