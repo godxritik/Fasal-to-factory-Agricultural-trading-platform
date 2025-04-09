@@ -3,6 +3,7 @@ import emailjs from "emailjs-com";
 import plantLogo from "../assets/images/plantLogo.svg"
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
+import SpotlightCard from "./animations/SpotlightCard";
 import Footer from "./Footer";
 
 // import icon from "../assets/images/favicon.png"

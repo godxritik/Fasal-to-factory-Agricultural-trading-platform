@@ -45,7 +45,7 @@ function App() {
         <Route path='/register' element={<RegisterHandler />} />
         <Route path='/register-farmer' element={<FarmerRegister />} />
         <Route path='/register-trader' element={<TraderRegister />} />
-        {/* <Route path='/contact-us' element={<ContactForm />} /> */}
+        <Route path='/contact-us' element={<ContactForm />} />
         <Route path='/farmer-dashboard' element={<FarmerDashboard/>} />
         <Route path='/trader-dashboard' element={<TraderDashboard/>} />
         

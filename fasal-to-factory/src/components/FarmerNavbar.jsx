@@ -21,7 +21,7 @@
 //     setProfileStatus(!profileStatus);
 //   }
 
-  
+
 //   return (
 //     <div className="flex flex-col sm:flex-row flex-wrap w-full border px-4 py-2 justify-center sm:justify-between items-center bg-[#3F7D58] text-white rounded-t-xl text-lg  ">
 //       {/* Logo and Brand Name */}
@@ -71,7 +71,7 @@ function FarmerNavbar() {
   };
 
   // States for handling add item menu
-  const [addItemStatus, setAddItemStatus] = useState(true);
+  const [addItemStatus, setAddItemStatus] = useState(false);
   const handleAddItemToggle = () => {
     setMenuStatus(!menuStatus);
     setAddItemStatus(!addItemStatus);
@@ -88,24 +88,29 @@ function FarmerNavbar() {
   }, []);
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap w-full border px-4 py-2 justify-center sm:justify-between items-center bg-[#3F7D58] text-white rounded-t-xl text-lg  ">
-    
-      <div className="flex gap-2 items-center mb-3 sm:mb-0">
-        <img className="w-[40px]" src={plantLogo} alt="Farm Logo" />
-        <a href="/farmer-dashboard">Fasal 2 factory</a>
+
+    <div className="w-full border px-4 py-2 bg-[#3F7D58] text-white rounded-t-xl text-lg">
+      <div className="flex items-center justify-between w-full flex-wrap">
+        {/* Left - Logo */}
+        <div className="flex gap-2 items-center mb-3 sm:mb-0">
+          <img className="w-[40px]" src={plantLogo} alt="Farm Logo" />
+          <a href="/farmer-dashboard">Fasal 2 factory</a>
+        </div>
+
+        {/* Center - Navigation Links */}
+        <ul className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 mb-3 sm:mb-0">
+          <li><a href="/" className="hover:font-bold">Home</a></li>
+          <li><a href="#" className="hover:font-bold">About</a></li>
+          <li><a href="/contact-us" className="hover:font-bold">Contact</a></li>
+        </ul>
+
+        {/* Right - Menu Icon */}
+        <button onClick={handleMenuToggle} className="mb-3 sm:mb-0">
+          <img className="w-[35px]" src={menuIcon} alt="" />
+        </button>
       </div>
 
-    
-      <ul className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
-        <li><a href="/" className="hover:font-bold  ">Home</a></li>
-        <li><a href="#" className="hover:font-bold ">About</a></li>
-        <li><a href="/contact-us" className="hover:font-bold">Contact</a></li>
-      </ul>
-
-      <button onClick={handleMenuToggle}>
-        <img className="w-[35px]" src={menuIcon} alt="" />
-      </button>
-
+      {/* Overlays */}
       <FarmerSidebar
         menuStatus={menuStatus}
         handleMenuToggle={handleMenuToggle}
@@ -120,16 +125,9 @@ function FarmerNavbar() {
       />
 
       <AddItem addItemStatus={addItemStatus} handleAddItemToggle={handleAddItemToggle} />
-
-     
-
-      {/* Add New Item Modal */}
-      {/* <AddItemModal addItemStatus={addItemStatus} handleAddItemToggle={handleAddItemToggle} /> */}
-
-      {/* Success Message */}
-      {/* <SuccessMessage showSuccess={showSuccess} setShowSuccess={setShowSuccess} /> */}
-
     </div>
+
+
   );
 }
 
