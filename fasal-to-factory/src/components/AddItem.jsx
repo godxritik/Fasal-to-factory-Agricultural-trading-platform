@@ -3,6 +3,7 @@ import SpotlightCard from "../components/animations/SpotlightCard";
 import closeIconWhite from "../assets/images/closeIcon-white.svg";
 import SuccessMessage from "../components/SuccessMessage";
 import ErrorMessage from "../components/ErrorMessage";
+import addIcon from "../assets/images/addIcon.svg";
 
 function AddItem({ addItemStatus, handleAddItemToggle }) {
   const [formData, setFormData] = useState({
@@ -21,9 +22,11 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    const userId = localStorage.getItem("userId");
+    
     if (
       formData.productName &&
       formData.description &&
@@ -31,17 +34,49 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
       formData.quantity &&
       formData.price
     ) {
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-        handleAddItemToggle(); // Close modal
-      }, 1500);
-      console.log("Item added:", formData);
+      try {
+        const itemId = userId+formData.productName;
+        console.log(itemId);
+        const response = await fetch("http://localhost:5000/add-item", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, userId, itemId }),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          setShowSuccess(true);
+          setTimeout(() => { setShowSuccess(false);}, 1500);
+          console.log("Item added:", data.item);
+
+          // reseting form data after saving to database
+         setFormData({
+           productName : "",
+           description : "",
+           unit : "",
+          quantity : "",
+          price : ""
+
+         })
+
+        } else {
+          console.error(data.message);
+          setShowError(true);
+          setTimeout(() => setShowError(false), 1500);
+        }
+      } catch (error) {
+        console.error("Error adding item:", error);
+        setShowError(true);
+        setTimeout(() => setShowError(false), 1500);
+      }
     } else {
       setShowError(true);
       setTimeout(() => setShowError(false), 1500);
     }
   };
+
+
 
   return (
     <div
@@ -49,8 +84,8 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
         addItemStatus ? "scale-100" : "scale-0"
       } transition-all duration-100  `}
     >
-      <SpotlightCard className="custom-spotlight-card rounded-xl overflow-hidden " spotlightColor="#14532d">
-        <div className={`bg-transparent rounded-lg p-4 sm:p-8 md:p-10 w-full flex flex-wrap justify-around items-center gap-6 relative overflow-y-auto max-h-[90vh] no-scrollbar ${
+      <SpotlightCard className="custom-spotlight-card rounded-xl overflow-hidden  " spotlightColor="#14532d">
+        <div className={`bg-transparent rounded-lg p-4 sm:p-8 md:p-10 w-full flex flex-wrap justify-around items-center gap-6 relative  max-h-[90vh] no-scrollbar ${
         addItemStatus ? "scale-100" : "scale-0"
       } transition-all duration-500  `}>
           {/* Close Button */}
@@ -66,7 +101,7 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
             onSubmit={handleSubmit}
             className="w-full md:w-[400px] text-white"
           >
-            <h2 className="text-xl font-bold text-white mb-4 text-center">
+            <h2 className="text-xl font-bold text-white mb-3 text-center">
               Add New Product
             </h2>
 
@@ -85,7 +120,7 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
               />
             </div>
 
-            <div className="mb-3">
+            <div className="mb-2">
               <label htmlFor="description" className="font-semibold text-sm">
                 Description
               </label>
@@ -149,7 +184,17 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
               />
             </div>
 
+            {/* <div className="flex gap-2 items-center mb-4">
+            <label htmlFor="add-images" className="font-semibold text-sm">
+               Add images  <img className="inline" src={addIcon} alt="add-icon" />
+              </label>
+              
+              <input id="add-images" className="hidden" type="file" multiple />
+             
+            </div> */}
+
             <button
+            onClick={handleSubmit}
               type="submit"
               className="w-full px-4 py-2 text-white border-2 border-white font-medium hover:bg-white hover:text-[#3f7d58] rounded-md transition-all duration-300"
             >

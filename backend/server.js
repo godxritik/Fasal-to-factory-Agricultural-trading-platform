@@ -61,6 +61,18 @@ const traderSchema = new Schema({
 });
 const Trader = model("Trader", traderSchema);
 
+const itemSchema = new Schema({
+  userId: { type: String, required: true },
+  itemId: { type: String, required: true }, 
+  productName: String,
+  description: String,
+  unit: String,
+  quantity: Number,
+  price: Number,
+  createdAt: { type: Date, default: Date.now }
+});
+const Item = model("Item", itemSchema);
+
 app.post("/register-farmer", async (req, res) => {
   try {
     const { fullname, email, pass, mobile, PAN } = req.body;
@@ -156,6 +168,25 @@ app.put("/farmer/:userId", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
+app.post("/add-item", async (req, res) => {
+  try {
+    const { userId, itemId, productName, description, unit, quantity, price } = req.body;
+
+    if (!userId || !itemId || !productName || !description || !unit || !quantity || !price) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const newItem = new Item({ userId, itemId, productName, description, unit, quantity, price });
+    await newItem.save();
+
+    res.status(201).json({ message: "Item added successfully", item: newItem });
+  } catch (error) {
+    console.error("Add item error:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
