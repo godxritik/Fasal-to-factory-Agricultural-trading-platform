@@ -4,6 +4,7 @@ import closeIconWhite from "../assets/images/closeIcon-white.svg";
 import SuccessMessage from "../components/SuccessMessage";
 import ErrorMessage from "../components/ErrorMessage";
 import addIcon from "../assets/images/addIcon.svg";
+// import { now } from "mongoose";
 
 function AddItem({ addItemStatus, handleAddItemToggle }) {
   const [formData, setFormData] = useState({
@@ -35,10 +36,11 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
       formData.price
     ) {
       try {
-        const itemId = userId+formData.productName;
+        const date = new Date();
+        const itemId = userId+ "-" +date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getHours() + "-" + date.getMinutes() + "-" + formData.productName;
         console.log(itemId);
         const response = await fetch("http://localhost:5000/add-item", {
-          method: "POST",
+          method: "POST", 
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...formData, userId, itemId }),
         });
@@ -47,7 +49,7 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
   
         if (response.ok) {
           setShowSuccess(true);
-          setTimeout(() => { setShowSuccess(false);}, 1500);
+          setTimeout(() => { setShowSuccess(false);}, 2000);
           console.log("Item added:", data.item);
 
           // reseting form data after saving to database

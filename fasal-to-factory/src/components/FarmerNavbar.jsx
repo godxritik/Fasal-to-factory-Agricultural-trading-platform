@@ -90,7 +90,7 @@ function FarmerNavbar() {
   return (
 
     <div className="w-full border px-4 py-2 bg-[#3F7D58] text-white rounded-t-xl text-lg">
-      <div className="flex items-center justify-between w-full flex-wrap">
+      <div className="flex flex-col sm:flex-row items-center justify-between w-full flex-wrap ">
         {/* Left - Logo */}
         <div className="flex gap-2 items-center mb-3 sm:mb-0">
           <img className="w-[40px]" src={plantLogo} alt="Farm Logo" />
