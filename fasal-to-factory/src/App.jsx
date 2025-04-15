@@ -11,11 +11,15 @@ import Footer from './components/Footer.jsx';
 import FarmerDashboard from './components/FarmerDashboard.jsx';
 import TraderDashboard from './components/TraderDashboard.jsx';
 
+import ScrollReveal from './components/animations/ScrollReveal.jsx';
+
+
+
 
 function AppWrapper() {
   return (
     <BrowserRouter>
-      <App />
+     <App/>
     </BrowserRouter>
   );
 }
@@ -31,7 +35,7 @@ function App() {
   }, [location.key]); // Trigger on every route change
 
   return (
-    <div className='w-full relative min-h-screen scroll-smooth '>
+    <div className='w-full relative max-h-screen scroll-smooth overflow-auto scrollbar-hide'>
       {/* Force 1-second loader on every route change */}
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
@@ -46,9 +50,9 @@ function App() {
         <Route path='/register-farmer' element={<FarmerRegister />} />
         <Route path='/register-trader' element={<TraderRegister />} />
         <Route path='/contact-us' element={<ContactForm />} />
-        <Route path='/farmer-dashboard' element={<FarmerDashboard/>} />
-        <Route path='/trader-dashboard' element={<TraderDashboard/>} />
-        
+        <Route path='/farmer-dashboard' element={<FarmerDashboard />} />
+        <Route path='/trader-dashboard' element={<TraderDashboard />} />
+
       </Routes>
 
       <Footer />
