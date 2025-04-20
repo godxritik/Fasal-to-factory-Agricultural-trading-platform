@@ -6,7 +6,7 @@ import SuccessMessage from "./SuccessMessage";
 
 // import UpdateFarmerProfile from "./UpdateFarmerProfile";
 
-function FarmerSidebar ({ menuStatus, handleMenuToggle,handleProfileToggle, handleAddItemToggle }) {
+function FarmerSidebar ({ menuStatus, handleMenuToggle,handleProfileToggle, handleAddItemToggle, handleMyCartToggle }) {
 
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
@@ -55,7 +55,7 @@ function FarmerSidebar ({ menuStatus, handleMenuToggle,handleProfileToggle, hand
         <nav className="flex flex-col items-center gap-4 px-2">
           <button onClick={handleProfileToggle}  className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer">Profile</button>
           <button onClick={handleAddItemToggle} className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer ">Add Item</button>
-          <button className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer ">My Cart</button>
+          <button onClick={handleMyCartToggle} className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer ">My Cart</button>
           <button className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer ">My Sells</button>
           <button className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer ">Settings</button>
           <button onClick={handleLogout} className="hover:bg-[#3F7D58] hover:text-white border-2 border-[#3F7D58] w-full py-1 rounded  transition-all duration-200 text-center cursor-pointer ">Logout</button>

@@ -91,7 +91,7 @@ function FarmerProfile({ userId, profileStatus, handleProfileToggle }) {
         <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 ${profileStatus ? "scale-1" : "-scale-0"} transition-all duration-100 h-auto`}>
 
 
-            <SpotlightCard className="custom-spotlight-card     " spotlightColor="#14532d">
+            <SpotlightCard className="custom-spotlight-card rounded-xl overflow-hidden     " spotlightColor="#14532d">
 
                 <div className={`bg-transparent rounded-lg p-2 sm:p-8 md:p-10 w-full  flex flex-wrap justify-around items-center space-y-4 md:space-y-0 gap-4 sm:gap-12  relative  ${profileStatus ? "scale-1" : "-scale-0"} transition-all duration-500 overflow-y-auto max-h-[90vh] no-scrollbar overflow-hidden  `}>
 

@@ -4,6 +4,7 @@ import Carousel from "./Carousel";
 import Categories from "./Categories";
 import Footer from "./Footer.jsx";
 import { useState } from "react";
+import CartItem from "./CartItem.jsx";
 // import FarmerHamburgerIcon from "./FarmerHamburgerIcon.jsx";
 // import FlipCard from "./FlipCard";
 
@@ -23,6 +24,7 @@ function FarmerDashboard() {
             </div>
             <Carousel />
             <Categories/>
+            
 
 
         </div>

@@ -26,13 +26,13 @@ const [failedStatus, setFailedStatus] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+    
     emailjs
       .send(
-        "service_ywx1h4v",   // EmailJS Service ID
-        "template_d9jg43n",  // EmailJS Template ID
+        "service_6cobrei",   // EmailJS Service ID
+        "template_b3xmvum",  // EmailJS Template ID
         formData,
-        "AIu7RGpCM3euSmMDM"       //  EmailJS Public Key
+        "BWeg4YSRqXBh5Bjk6"       //  EmailJS Public Key
       )
       .then(
         (response) => {

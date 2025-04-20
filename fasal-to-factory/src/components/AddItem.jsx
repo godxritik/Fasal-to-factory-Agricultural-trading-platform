@@ -4,6 +4,7 @@ import closeIconWhite from "../assets/images/closeIcon-white.svg";
 import SuccessMessage from "../components/SuccessMessage";
 import ErrorMessage from "../components/ErrorMessage";
 import addIcon from "../assets/images/addIcon.svg";
+import UploadImages from "./forms/UploadImages";
 // import { now } from "mongoose";
 
 function AddItem({ addItemStatus, handleAddItemToggle }) {
@@ -86,7 +87,7 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
         addItemStatus ? "scale-100" : "scale-0"
       } transition-all duration-100  `}
     >
-      <SpotlightCard className="custom-spotlight-card rounded-xl overflow-hidden  " spotlightColor="#14532d">
+      <SpotlightCard className="custom-spotlight-card rounded-xl overflow-hidden flex  " spotlightColor="#14532d">
         <div className={`bg-transparent rounded-lg p-4 sm:p-8 md:p-10 w-full flex flex-wrap justify-around items-center gap-6 relative  max-h-[90vh] no-scrollbar ${
         addItemStatus ? "scale-100" : "scale-0"
       } transition-all duration-500  `}>
@@ -204,6 +205,10 @@ function AddItem({ addItemStatus, handleAddItemToggle }) {
             </button>
           </form>
         </div>
+
+      {/* Upload Images */}
+      {/* <UploadImages /> */}
+
       </SpotlightCard>
 
       <SuccessMessage
